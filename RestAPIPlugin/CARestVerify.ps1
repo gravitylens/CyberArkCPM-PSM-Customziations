@@ -1,15 +1,19 @@
-$url = Read-Host -Prompt "PVWA URL (e.g.  https://pvwa.mycompany.org)"
-$TargetUser = Read-Host -Prompt "TargetUser"
-$CurPass = Read-Host -Prompt "CurrentPassword" -AsSecureString
+#Read-Host is not compatable with TPC
+Write-Host "Address:"
+$url = [Console]::ReadLine()
+Write-Host "TargetUser:"
+$TargetUser = [Console]::ReadLine()
+Write-Host "CurrentPassword:"
+$CurPass = [Console]::ReadLine()
 
 $uri = "$url/PasswordVault/api/Auth/cyberark/Logon"
 
 $headers = @{
-    Content-Type = "application/json"
+    "Content-Type" = "application/json"
 }
 $body = @{
-    username = $Targetuser
-    password = ConvertFrom-SecureString -SecureString $CurPass -AsPlainText
+    "username" = $Targetuser
+    "password" = $CurPass
 } | ConvertTo-Json
 
 try{

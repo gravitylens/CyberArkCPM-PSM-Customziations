@@ -1,17 +1,21 @@
-$url = Read-Host -Prompt "PVWA URL (e.g.  https://pvwa.mycompany.org)"
-$TargetUser = Read-Host -Prompt "TargetUser"
-$CurPass = Read-Host -Prompt "CurrentPassword" -AsSecureString
-$NewPass = Read-Host -Prompt
+Write-Host "Address:"
+$url = [Console]::ReadLine()
+Write-Host "TargetUser:"
+$TargetUser = [Console]::ReadLine()
+Write-Host "CurrentPassword:"
+$CurPass = [Console]::ReadLine()
+Write-Host "NewPassword:"
+$NewPass = [Console]::ReadLine()
 
 $uri = "$url/PasswordVault/api/Auth/cyberark/Logon"
 
 $headers = @{
-    Content-Type = "application/json"
+    "Content-Type" = "application/json"
 }
 $body = @{
-    username = $Targetuser
-    password = ConvertFrom-SecureString -SecureString $CurPass -AsPlainText
-    newPassword = ConvertFrom-SecureString -SecureString $NewPass -AsPlainText
+    "username" = $Targetuser
+    "password" = $CurPass
+    "newPassword" = $NewPass
 } | ConvertTo-Json
 
 try{
