@@ -1,6 +1,12 @@
-set pmpass=123Training
-set pmnewpass=1234Train
-set pmextrapass1=Cyberark1
-set pmextrapass2=123Training
+set pmpass=Cyberark1
+set pmnewpass=Ki9y39&5cfg
+set pmextrapass1=Ki9y39&5cfg
+REM set pmextrapass2=Cyberark1
+REM set pmextrapass3=Cyberark1
 
-bin\PMTerminal.exe user.ini changepass printallstates
+set DebugLogFullParsingInfo=yes
+
+type %1 > User.ini
+
+bin\CyberArk.TPC.exe User.ini %2 syntaxcheck
+REM bin\PMTerminal.exe User.ini %2 syntaxcheck
